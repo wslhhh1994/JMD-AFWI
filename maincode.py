@@ -1007,178 +1007,15 @@ for iter_i in range(40):
 #         print(g_max)
 
         g_ = g_+g_max/1000
-#         if iter_i >150:
-#             grad_T = g / g_
-        if iter_i < 80:
-            grad_T = g
-            delta_grad = np.zeros([NX_PML, NZ_PML])
-            grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-            delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-            delta_grad=delta_grad.astype(np.float32)
-        if iter_i >= 80:
-            grad_T = g/ g_
-            delta_grad = np.zeros([NX_PML, NZ_PML])
-            grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-            delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-            delta_grad=delta_grad.astype(np.float32)
-            
-#         grad_T = g/ g_
-#         delta_grad = np.zeros([NX_PML, NZ_PML])
-#         grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-#         delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-#         delta_grad=delta_grad.astype(np.float32)     
 
-#         grad_T = g/ g_
-#         delta_grad = np.zeros([NX_PML, NZ_PML])
-#         grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-#         delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-#         delta_grad=delta_grad.astype(np.float32)
-#         grad_T = g/ g_
-#         delta_grad = np.zeros([NX_PML, NZ_PML])
-#         grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-#         delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-#         delta_grad=delta_grad.astype(np.float32)
-        
-        # if iter_i==350:
-        #     s_adam=np.zeros([NX_PML, NZ_PML])
-        #     r_adam=np.zeros([NX_PML, NZ_PML])
-        #     s_adam_1=np.zeros([NX_PML, NZ_PML])
-        #     r_adam_1=np.zeros([NX_PML, NZ_PML])
-        #####adam
-        
-#         if  iter_i >150 and iter_i<300:
-#         grad_T = g
-#         delta_grad = np.zeros([NX_PML, NZ_PML])
-#         grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
-#         delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
-#         delta_grad=delta_grad.astype(np.float32)
-
-#         s_adam[PML + bound:-PML, PML:-PML] = p1_adam * s_adam[PML + bound:-PML, PML:-PML] + (1 - p1_adam) * delta_grad[PML + bound:-PML,PML:-PML]
-#         r_adam[PML + bound:-PML, PML:-PML] = p2_adam * r_adam[PML + bound:-PML, PML:-PML] + (1 - p2_adam) * delta_grad[PML + bound:-PML,PML:-PML] * delta_grad[PML + bound:-PML,PML:-PML]
-#         s_adam_1[PML + bound:-PML, PML:-PML] = s_adam[PML + bound:-PML, PML:-PML] / (1 - np.power(p1_adam, iter_i + 1))
-#         r_adam_1[PML + bound:-PML, PML:-PML] = r_adam[PML + bound:-PML, PML:-PML] / (1 - np.power(p2_adam, iter_i + 1))
-#         delta_grad[PML + bound:-PML, PML:-PML] = s_adam_1[PML + bound:-PML, PML:-PML] / (np.sqrt(r_adam_1[PML + bound:-PML, PML:-PML]) + theta_adam)
-#         if iter_i < 20:
-#             for nx_i in range(NX_PML):
-#                 for nz_i in range(NZ_PML):
-#                     delta_grad[nx_i,nz_i]=delta_grad[nx_i,nz_i]*1/(1+np.power((nx_i/(PML+100)),16))
-#                     s_adam[nx_i,nz_i]=s_adam[nx_i,nz_i]*1/(1+np.power((nx_i/(PML+100)),16))
-#                     r_adam[nx_i,nz_i]=r_adam[nx_i,nz_i]*1/(1+np.power((nx_i/(PML+100)),16))
-#                     s_adam_1[nx_i,nz_i]=s_adam_1[nx_i,nz_i]*1/(1+np.power((nx_i/(PML+100)),16))
-#                     r_adam_1[nx_i,nz_i]=r_adam_1[nx_i,nz_i]*1/(1+np.power((nx_i/(PML+100)),16))
-                    
-#         if iter_i >=20 and iter_i <50:
-#             for nx_i in range(NX_PML):
-#                 for nz_i in range(NZ_PML):
-#                     delta_grad[nx_i, nz_i] = delta_grad[nx_i,nz_i]*1 / (1 + np.power((nx_i / (PML + 100+75*(iter_i-20)/(50-20))), 16))
-#                     s_adam[nx_i,nz_i]=s_adam[nx_i,nz_i]*1/(1 + np.power((nx_i / (PML + 100+75*(iter_i-20)/(50-20))), 16))
-#                     r_adam[nx_i,nz_i]=r_adam[nx_i,nz_i]*1/(1 + np.power((nx_i / (PML + 100+75*(iter_i-20)/(50-20))), 16))
-#                     s_adam_1[nx_i,nz_i]=s_adam_1[nx_i,nz_i]*1/(1 + np.power((nx_i / (PML + 100+75*(iter_i-20)/(50-20))), 16))
-#                     r_adam_1[nx_i,nz_i]=r_adam_1[nx_i,nz_i]*1/(1 + np.power((nx_i / (PML + 100+75*(iter_i-20)/(50-20))), 16))
-#         import scipy.ndimage  ##lbfgs
-#         # delta_grad[PML + bound+5:-PML-5, PML:-PML] = scipy.ndimage.filters.gaussian_filter(delta_grad[PML + bound+5:-PML-5, PML:-PML], sigma=3)
-#         print('delta_grad', delta_grad, flush=True)
+        grad_T = g / g_
 
 
-#         if iter_i==0:
-#             s0=0.00006*delta_grad[PML + bound:-PML, PML:-PML]
-#             y0=0.00001*delta_grad[PML + bound:-PML, PML:-PML]
+        delta_grad = np.zeros([NX_PML, NZ_PML])
+        grad_min, max_grad = np.percentile(abs(grad_T[PML + bound:-PML, PML:-PML]), [2, 98])
+        delta_grad[PML + bound:-PML, PML:-PML] = grad_T[PML + bound:-PML, PML:-PML]/max_grad
+        delta_grad=delta_grad.astype(np.float32)
 
-#             # pass
-#         else:
-#             s0 = vp[PML + bound:-PML, PML:-PML]-vp_pre[PML + bound:-PML, PML:-PML]
-#             y0 = delta_grad[PML + bound:-PML, PML:-PML]-grad_pre[PML + bound:-PML, PML:-PML]
-#         s0=s0.reshape([(NX-bound)*NZ])
-#         y0=y0.reshape([(NX-bound)*NZ])
-# #         hdiag=np.dot(s0,y0)/np.dot(y0,y0)
-#         hdiag=1
-#         print('hdiag', hdiag, flush=True)
-#         if iter_i < lt :
-#           # if iter_i==0:
-#           #     pass
-#           # else:
-
-#             sm[iter_i]=s0
-#             ym[iter_i] = y0
-
-#             q = np.zeros([iter_i + 1, (NX-bound)*NZ])
-#             r = np.zeros([(NX-bound)* NZ])
-#             alpha = np.zeros(iter_i)
-#             beta = np.zeros(iter_i)
-
-#             ro=np.zeros(iter_i)
-#             for iter_ii in range(iter_i):
-#                 print(iter_ii,sm[iter_ii],ym[iter_ii],flush=True)
-#                 ro[iter_ii]=1 / (np.dot(ym[iter_ii] , sm[iter_ii])+0.0000001)
-#                 # ro[iter_ii]=1 / (np.dot(ym[iter_ii]* sm[iter_ii])+0.0000001)
-
-#             print('ro',ro,flush=True)
-
-#             q[iter_i]=delta_grad[PML + bound:-PML, PML:-PML].copy().reshape([(NX-bound)*NZ])
-
-#             for iter_ii in range(iter_i-1,-1,-1):
-#                 alpha[iter_ii]=ro[iter_ii]*np.dot(sm[iter_ii],q[iter_ii+1])
-#                 # alpha[iter_ii]=ro[iter_ii]*np.sum(sm[iter_ii]*q[iter_ii+1])
-
-#                 q[iter_ii]=q[iter_ii+1] - (alpha[iter_ii]*ym[iter_ii])
-
-#             r=hdiag*q[0]
-
-#             for iter_ii in range(iter_i):
-#                 beta[iter_ii]=ro[iter_ii]*np.dot(ym[iter_ii],r)
-#                 # beta[iter_ii]=ro[iter_ii]*np.sum(ym[iter_ii]*r)
-
-#                 r=r+ sm[iter_ii]*(alpha[iter_ii]-beta[iter_ii])
-#             print('beta',beta,flush=True)
-#             print('alpha', alpha, flush=True)
-
-#         else:
-#             temp_sm=sm.copy()
-#             temp_ym=ym.copy()
-#             sm[:lt-1]=temp_sm[1:]
-#             ym[:lt - 1] = temp_ym[1:]
-
-#             sm[-1]=s0
-#             ym[-1] = y0
-
-
-#             q = np.zeros([lt + 1, (NX-bound)* NZ])
-#             r = np.zeros([(NX-bound)*NZ])
-#             alpha = np.zeros(lt)
-#             beta = np.zeros(lt)
-
-#             ro = np.zeros(lt)
-#             for iter_ii in range(lt):
-#                 ro[iter_ii] =1 / (np.dot(ym[iter_ii] , sm[iter_ii])+0.0000001)
-#                 # ro[iter_ii] =1 / (np.sum(ym[iter_ii]* sm[iter_ii])+0.0000001)
-
-#             q[lt] = delta_grad[PML + bound:-PML, PML:-PML].copy().reshape([(NX-bound)*NZ])
-
-#             for iter_ii in range(lt - 1, -1, -1):
-#                 alpha[iter_ii] = ro[iter_ii] * np.dot(sm[iter_ii],q[iter_ii+1])
-#                 # alpha[iter_ii] = ro[iter_ii] * np.sum(sm[iter_ii]*q[iter_ii+1])
-
-#                 q[iter_ii] = q[iter_ii + 1] - (alpha[iter_ii] * ym[iter_ii])
-
-#             r = hdiag * q[0]
-
-#             for iter_ii in range(lt):
-#                 beta[iter_ii] = ro[iter_ii]*np.dot(ym[iter_ii],r)
-#                 # beta[iter_ii] = ro[iter_ii]*np.sum(ym[iter_ii]*r)
-
-#                 r = r + sm[iter_ii] * (alpha[iter_ii] - beta[iter_ii])
-
-
-#         grad_pre = delta_grad.copy()
-#         # if iter_i!=0:
-#         delta_grad[PML + bound:-PML, PML:-PML] = r.reshape([(NX-bound),NZ])
-#         grad_min, max_grad = np.percentile(abs(delta_grad[PML + bound:-PML, PML:-PML]), [2, 99])
-#         delta_grad[PML + bound:-PML, PML:-PML] = delta_grad[PML + bound:-PML, PML:-PML] / max_grad
-
-        if   iter_i<250:
-            delta_grad=scipy.ndimage.filters.gaussian_filter(delta_grad, sigma=1)
-#         else:
-#             delta_grad=scipy.ndimage.filters.gaussian_filter(delta_grad, sigma=0.5)
         
         vp1=vp.copy()
         vp2=vp.copy()
@@ -1268,18 +1105,7 @@ for iter_i in range(40):
                         record = scipy.signal.filtfilt(aa, bb, record)
                         record_raw = scipy.signal.filtfilt(aa, bb, record_raw)
                 
-            # f_dt = 1e-3
-            # f_nt = 4096
-#             high_freq = int(3 / (1 / f_dt / f_nt))
-#             fp = fft(record_raw)
-#             fp[:, high_freq:-high_freq] = 0
-#             record_raw = ifft(fp)
-#             record_raw=record_raw.astype(np.float32)
-            
-#             fp = fft(record)
-#             fp[:, high_freq:-high_freq] = 0
-#             record = ifft(fp)
-#             record=record.astype(np.float32)
+
             
             res = record - record_raw
 
@@ -1349,18 +1175,7 @@ for iter_i in range(40):
                                                      fs=None)  # low_freq/ Nyquist freq == low_freq/（dt/2）
                         record = scipy.signal.filtfilt(aa, bb, record)
                         record_raw = scipy.signal.filtfilt(aa, bb, record_raw)
-            # f_dt = 1e-3
-            # f_nt = Tn
-#             high_freq = int(3 / (1 / f_dt / f_nt))
-#             fp = fft(record_raw)
-#             fp[:, high_freq:-high_freq] = 0
-#             record_raw = ifft(fp)
-#             record_raw=record_raw.astype(np.float32)
-            
-#             fp = fft(record)
-#             fp[:, high_freq:-high_freq] = 0
-#             record = ifft(fp)
-#             record=record.astype(np.float32)
+
             
             res = record - record_raw
             
@@ -1373,18 +1188,10 @@ for iter_i in range(40):
     obj_f_2 = comm.reduce(obj_f_2, root=0, op=MPI.SUM)
 
     if rank == 0:
-        # print(44444444444444,flush=True)
-        # grad_T = g / g_
-        #
-        #     print(obj_f,rank)
-        # print(obj_f_2, 'obf_2_j', rank,flush = True)
+
         obj_f_list.append(obj_f)
         print(obj_f, 'obf', rank,flush = True)
-        # print(4564564, flush=True)
-        # delta_grad = np.zeros([NX_PML, NZ_PML])
-        # max_grad = np.max(abs(grad_T[PML + 20:-PML, PML:-PML]))
-        # delta_grad[PML + 20:-PML, PML:-PML] = grad_T[PML + 20:-PML, PML:-PML] / max_grad
-        # comm.Bcast(delta_grad, root=0)
+
         b_=(delta_2*delta_2*obj_f_1-delta_1*delta_1*obj_f_2-obj_f*(delta_2*delta_2-delta_1*delta_1))/(delta_1*delta_2*(delta_2-delta_1))
         a_=(obj_f_1-obj_f-b_*delta_1)/(delta_1*delta_1)
         delta=-b_/(2*a_)
@@ -1424,195 +1231,6 @@ for iter_i in range(40):
             import numpy as np
 
 
-#             all_record_0 = np.zeros([NS, NR, Tn])
-#             for i in range(NS):
-#                 # data_s = np.fromfile(record_dir + str(i) + '.bin', dtype=np.float32).reshape([450, 4096])
-#                 try:
-#                     data_s = np.fromfile(recordfile + str(i) + '.bin', dtype=np.float32).reshape([NR, Tn])
-#                 except:
-#                     data_s = np.fromfile(recordfile + str(i) + '.dat', dtype=np.float32).reshape([NR, Tn])
-                    
-
-
-#                 all_record_0[i, :, :] = data_s[:, :]
-
-
-#             n_cmp = n_cmp
-#             cmp_8_data = np.zeros([NR, n_cmp, Tn + NS + NR])  # 中心点覆盖次数为8的cmp道集
-
-#             import os
-
-#             # cmp_dir = "cmp_number_mar160/"
-#             cmp_dir = "cmp_number/"
-
-#             if not os.path.exists(cmp_dir):
-#                 os.mkdir(cmp_dir)
-
-
-
-#             n_450 = []
-#             for i in range(0, NR):
-
-#                 ar = np.loadtxt(cmp_dir + str(i) + "_cmp.txt")
-#                 ar = ar.reshape([-1, 3])
-#                 # print(ar)
-#                 if ar.shape[0] != 0:
-#                     # print(i)
-
-#                     cmp_n = np.zeros([ar.shape[0], Tn + NS + NR])  # 求单个中心点的道集
-#                     # print(ar.shape[0])
-#                     for n in range(ar.shape[0]):
-
-#                         # print(df_0)
-#                         n_recv = ar[n, 0]
-#                         n_shot = ar[n, 1] 
-#                         n_recv = ar[n, 0]
-#                         n_shot = ar[n, 1]
-#                         # print(n_shot,n_recv)
-#                         weight_d = np.arange(0, NS)
-#                         weight_d = weight_d.astype(np.float32)
-#                         train_indecies = [int(n_shot / delta_s)]
-#                         train_indecies = np.array(train_indecies)
-#                         source_coding = np.zeros(NS)
-
-#                         for ii in range(weight_d.shape[0]):
-
-#                             wd = train_indecies - weight_d[ii]
-#                             wd = np.abs(wd)
-#                             wd = wd
-#                             # print(ww)
-#                             for mm in range(wd.shape[0]):
-#                                 if wd[mm] != 0:
-#                                     wd[mm] = 1 / wd[mm]
-#     #                                 wd[mm] = 1 
-
-#                                 else:
-#                                     wd[mm] = 1
-#                             source_coding[ii] = np.sum(wd)
-
-#                         source_coding = source_coding / source_coding.max()
-
-#                         weight_d = np.arange(0, NR)
-#                         weight_d = weight_d.astype(np.float32)
-#                         train_indecies = [n_recv]
-#                         train_indecies = np.array(train_indecies)
-#                         receiv_coding = np.zeros(NR)
-
-#                         for ii in range(weight_d.shape[0]):
-#                             wd = train_indecies - weight_d[ii]
-#                             wd = np.abs(wd)
-#                             wd = wd
-#                             # print(ww)
-#                             for mm in range(wd.shape[0]):
-#                                 if wd[mm] != 0:
-#                                     wd[mm] = 1 / wd[mm]
-#     #                                 wd[mm] = 1 
-
-#                                 else:
-#                                     wd[mm] = 1
-#                             receiv_coding[ii] = np.sum(wd)
-
-#                         receiv_coding = receiv_coding / receiv_coding.max()
-                        
-                        
-#                         # print(n_shot,n_recv)
-
-#                         if n < int(ar.shape[0] - 1) / 2:
-
-#                             cmp_n[2 * n + 1, :Tn] = all_record_0[int(n_shot / delta_s), int(n_recv), :]
-#                             cmp_n[2 * n + 1, Tn:Tn + NS] = source_coding[:]
-#                             cmp_n[2 * n + 1, Tn + NS:Tn + NS + NR] = receiv_coding[:]
-
-
-#                         else:
-
-                            
-#                             cmp_n[((ar.shape[0] - n - 1) * 2), :Tn] = all_record_0[int(n_shot / delta_s), int(n_recv), :]
-#                             cmp_n[((ar.shape[0] - n - 1) * 2), Tn:Tn + NS] = source_coding[:]
-#                             cmp_n[((ar.shape[0] - n - 1) * 2), Tn + NS:Tn + NS + NR] = receiv_coding[:]
-                            
-
-#                         # cmp_n[n]=all_record[int(n_shot/10),int(n_recv)] #求单个中心点的道集
-
-#                         # cmp_stack[i]+=all_record[int(n_shot/10),int(n_recv)]  #求叠加道集
-#                         # cmp_stack[i]=cmp_stack[i]/ar.shape[0]     #求叠加道集
-
-#                     # cmp_n.astype(np.float32).tofile('cmp_'+str(i)+'_stack_'+str(n)+'_4096.bin') #求单个中心点的道集
-#                     if ar.shape[0] > n_cmp:
-#                         cmp_8_data[i, :, :] = cmp_n[-n_cmp:, :]
-#                     else:
-#                         cmp_8_data[i, -ar.shape[0]:, :] = cmp_n[:, :]
-#                         for k in range(n_cmp - ar.shape[0]):
-#                             cmp_8_data[i, k, :] = cmp_n[0, :]
-
-#                     # cmp_stack.astype(np.float32).tofile('cmp_stack_450_4096.bin')
-
-# #             print(cmp_8_data.shape)
-# #             t_start=1
-# #             for n_trace in range(NR):
-# #                 for tk in range(1,Tn):
-# #                     if cmp_8_data[n_trace,-1,tk]-cmp_8_data[n_trace,-1,tk-1]>=0.01:
-# #                         t_start=tk
-# #                         break
-# #                     break
-# #             #     print(t_start)
-# #                 for i_cmp in range(n_cmp):
-# #                     cmp_8_data[n_trace,n_cmp-i_cmp-1,0:t_start+455+85*i_cmp]=0
-
-
-# #             """test: to emplify the amplitude of the weak signal"""
-# #             for i in range(seismic_data_raw.shape[0]):
-# #                 for j in range(seismic_data_raw.shape[1]):
-# #                     for k in range(seismic_data_raw.shape[2]):
-# #                         if seismic_data_raw[i,j,k] >0:
-# #                             seismic_data_raw[i, j, k]=1
-# #                         else:
-# #                             seismic_data_raw[i, j, k] = -1
-
-#             seismic_data_raw = cmp_8_data.copy()
-
-#             # print(seismic_data_raw.shape)
-
-#             seismic_data = np.zeros([NZ, n_channel, n_cmp, NS + NR + Tn])
-
-#             for i in range(n_channel):
-#                 seismic_data[:, i, :, :] = seismic_data_raw[:, :, :]
-
-#             for x_i in range(NZ):
-#                 if x_i ==0:
-#                     for jj in range(n_channel-2):
-#                         seismic_data[x_i, jj, :, :] = seismic_data_raw[x_i, :, :]
-#                     seismic_data[x_i, n_channel-2, :, :] = seismic_data_raw[x_i+1, :, :]
-#                     seismic_data[x_i, n_channel-1, :, :] = seismic_data_raw[x_i+2, :, :]
-#                 if x_i==1:
-#                     seismic_data[x_i, 0, :, :] = seismic_data_raw[x_i-1, :, :]
-#                     seismic_data[x_i, 1, :, :] = seismic_data_raw[x_i-1, :, :]
-#                     for jj in range(2,n_channel-2):
-#                         seismic_data[x_i, jj, :, :] = seismic_data_raw[x_i, :, :]
-                    
-#                     seismic_data[x_i, n_channel-2, :, :] = seismic_data_raw[x_i+1, :, :]
-#                     seismic_data[x_i, n_channel-1, :, :] = seismic_data_raw[x_i+2, :, :]
-#                 if x_i >=2 and x_i <=(NZ-3):
-#                     seismic_data[x_i, 0, :, :] = seismic_data_raw[x_i-2, :, :]
-#                     seismic_data[x_i, 1, :, :] = seismic_data_raw[x_i-1, :, :]
-                    
-#                     for jj in range(2,n_channel-2):
-#                         seismic_data[x_i, jj, :, :] = seismic_data_raw[x_i, :, :]
-                    
-#                     seismic_data[x_i, n_channel-2, :, :] = seismic_data_raw[x_i+1, :, :]
-#                     seismic_data[x_i, n_channel-1, :, :] = seismic_data_raw[x_i+2, :, :]
-#                 if x_i==(NZ-2):
-#                     seismic_data[x_i, 0, :, :] = seismic_data_raw[x_i-2, :, :]
-#                     seismic_data[x_i, 1, :, :] = seismic_data_raw[x_i-1, :, :]
-#                     for jj in range(2,n_channel-2):
-#                         seismic_data[x_i, jj, :, :] = seismic_data_raw[x_i, :, :]
-#                     seismic_data[x_i, n_channel-2, :, :] = seismic_data_raw[x_i+1, :, :]
-#                     seismic_data[x_i, n_channel-1, :, :] = seismic_data_raw[x_i+1, :, :]
-#                 if x_i == (NZ-1):
-#                     seismic_data[x_i, 0, :, :] = seismic_data_raw[x_i-2, :, :]
-#                     seismic_data[x_i, 1, :, :] = seismic_data_raw[x_i-1, :, :]
-#                     for jj in range(2,n_channel):
-#                         seismic_data[x_i, jj, :, :] = seismic_data_raw[x_i, :, :]
 
 
             unlabeled_m_raw=vp[PML:-PML, PML:-PML].T
@@ -1637,14 +1255,7 @@ for iter_i in range(40):
 
             from numpy.fft import fft, ifft
 
-#             f_dt = 1e-3
-#             f_nt = 175
-#             fp = fft(labeled_model)
-#             high_freq = int(30 / (1 / f_dt / f_nt))
-#             fp[:, high_freq:-high_freq] = 0
-#             labeled_el_new = ifft(fp)
-#             labeled_el_new = labeled_el_new.astype(np.float32)
-#             labeled_model[:,30:170]=labeled_el_new[:,30:170]
+
 
             """测井滤波"""
             log_vp1=labeled_model
@@ -1706,32 +1317,7 @@ for iter_i in range(40):
             # labeled_detla_model = (labeled_detla_model - labeled_detla_model_mean) / (labeled_detla_model_std)#均值方差归一化
             labeled_detla_model = (labeled_detla_model - labeled_detla_model_min) / (labeled_detla_model_max-labeled_detla_model_min) #最大最小归一化
 
-#             seis_mean = np.max(seismic_data[:, :, :, :Tn], axis=(0, -1), keepdims=True)
-#             seis_std = np.min(seismic_data[:, :, :, :Tn], axis=(0, -1), keepdims=True)
-#             seismic_data[:, :, :, :Tn] = (seismic_data[:, :, :, :Tn] - seis_std) / (seis_mean - seis_std)
-#             seismic_data = seismic_data.reshape(NR, n_channel * n_cmp, Tn + NR + NS)
-#             # print(seismic_data.shape)
 
-#             seismic_data_temp = np.zeros([seismic_data.shape[0], seismic_data.shape[1], NX * 10]) #  设置增强地震道的长度  nx*10
-#             seismic_data_temp[:, :, -(NR + NS):] = seismic_data[:, :, -(NR + NS):]
-#             seismic_data_temp[:, :, :NX * 10 - (NR + NS)] = seismic_data[:, :, int((pi * 5 * 1.1) ** 2):int((pi * 5 * 1.1) ** 2)+NX * 10 - (NR + NS)] 
-#             seismic_data = seismic_data_temp.copy()
-
-                        
-#             # print(seismic_data.shape)
-
-#             unlabeled_seismic_data=seismic_data.copy()
-# #             unlabeled_seismic_data = np.delete(seismic_data, well_loc, axis=0)
-
-#             labeled_seismic_data = seismic_data[well_loc]
-
-#             unlabeled_seismic_data = torch.tensor(unlabeled_seismic_data).float()
-#             labeled_seismic_data = torch.tensor(labeled_seismic_data).float()
-#             seismic_data = torch.tensor(seismic_data).float()
-#             if torch.cuda.is_available():
-#                 seismic_data=seismic_data.cuda()
-#                 unlabeled_seismic_data=unlabeled_seismic_data.cuda()
-#                 labeled_seismic_data=labeled_seismic_data.cuda()
 
             unlabeled_delta_model_mean = np.mean(unlabeled_delta_model, axis=(0, -1), keepdims=True)
             unlabeled_delta_model_std = np.std(unlabeled_delta_model, axis=(0, -1), keepdims=True)
@@ -1791,14 +1377,6 @@ for iter_i in range(40):
                 snr_torch=snr_torch.cuda()
 
 
-            #
-            # print("unlabeled_seismic_data:",unlabeled_seismic_data,flush=True)
-            # print("unlabeled_delta_model:",unlabeled_delta_model,flush=True)
-
-            # unlabeled_loader = data.DataLoader(
-            #     data.TensorDataset(unlabeled_seismic_data, unlabeled_delta_model,weight),
-            #     batch_size=batch_size,
-            #     shuffle=True)
             unlabeled_loader = data.DataLoader(
                 data.TensorDataset(unlabeled_seismic_data, unlabeled_delta_model,weight_net),
                 batch_size=batch_size,
@@ -1985,20 +1563,6 @@ for iter_i in range(40):
             result_std_from_gen = np.std(result_list_2, axis=(0))
 
 
-#             result_mean_from_gen = result_mean_from_gen.T   #可以试试不对速度模型做平滑 但是对梯度做平滑
-            
-#             if   iter_i<80:
-#                 result_mean_from_gen=scipy.ndimage.filters.gaussian_filter(result_mean_from_gen, sigma=1)
-#             else:
-#                 result_mean_from_gen=scipy.ndimage.filters.gaussian_filter(result_mean_from_gen, sigma=0.5)
-#             if iter_i < 100:
-#                 result_mean_from_gen=scipy.ndimage.filters.gaussian_filter(result_mean_from_gen, sigma=1)
-
-#             if len(obj_f_list)>3:
-#                 if obj_f_list[-1]/obj_f_list[0] - obj_f_list[-2]/obj_f_list[0] < 0.01:
-#                     result_mean_from_gen=scipy.ndimage.filters.gaussian_filter(result_mean_from_gen, sigma=1)
-#                 else:
-#                     result_mean_from_gen=scipy.ndimage.filters.gaussian_filter(result_mean_from_gen, sigma=1)
 
 
             result_std_from_gen=result_std_from_gen.reshape([NZ, NX])
@@ -2022,13 +1586,7 @@ for iter_i in range(40):
                         vp[i, j] = 5000.0
                     if vp[i, j] < 1500.0:
                         vp[i, j] = 1500.0
-        # comm.Barrier()
-        # comm.Bcast(vp, root=0)
-        # print(delta_grad.shape, rank, flush=True)
-        # comm.Barrier()
-    #     # plt.imshow(vp)
-    #     # plt.show()
-    #     grad_T[PML:-PML, PML:-PML].T.astype(np.float32).tofile(resultfile + str(iter_i) + '_orginal_grad.dat')
+
         delta_grad[PML:-PML, PML:-PML].T.astype(np.float32).tofile(resultfile + str(iter_i) + 'grad.bin')
         vp[PML:-PML, PML:-PML].T.astype(np.float32).tofile(resultfile + str(iter_i) + 'final_V.bin')
         result_std_from_gen.T.astype(np.float32).tofile(resultfile + str(iter_i) + 'std_V.bin')
